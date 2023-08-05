@@ -13,4 +13,9 @@ public class Validador {
 
     }
 
+    public static boolean mayorQueCero(int numero){
+
+        return numero > 0;
+    }
+
 }

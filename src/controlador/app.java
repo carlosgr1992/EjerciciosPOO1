@@ -2,11 +2,10 @@ package controlador;
 
 import modelo.Persona;
 import modelo.Producto;
+import servicios.Aleatorio;
 import servicios.Validador;
-import servicios.pideDatos;
+import servicios.Entrada;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class app {
@@ -75,7 +74,7 @@ public class app {
             boolean esValido;
 
             do {
-                edad = pideDatos.pideNumero("Introduce una edad:");
+                edad = Entrada.pideEntero("Introduce una edad:");
                 esValido = Validador.estaEntre(edad,0,99);
                 if(!esValido){
                     System.out.println("Por favor, introduzca un valor correcto\n");
@@ -95,7 +94,7 @@ public class app {
         int numPersonas;
 
         do {
-            numPersonas = pideDatos.pideNumero("¿Cuántas personas quieres añadir?");
+            numPersonas = Entrada.pideEntero("¿Cuántas personas quieres añadir?");
             esValido = Validador.estaEntre(numPersonas,MIN_PERSONAS,MAX_PERSONAS);
             if(!esValido){
                 System.out.printf("Por favor, introduce un valor correcto entre %d y %d\n",MIN_PERSONAS,MAX_PERSONAS);
@@ -119,7 +118,7 @@ public class app {
             boolean esValido;
 
             do {
-                edad = pideDatos.pideNumero("Introduce una edad:");
+                edad = Entrada.pideEntero("Introduce una edad:");
                 esValido = Validador.estaEntre(edad,0,99);
                 if(!esValido){
                     System.out.println("Por favor, introduzca un valor correcto\n");
@@ -132,18 +131,45 @@ public class app {
         muestraPersonas(personasArray2);
     }
 
+    private static void muestraLanzamientos(int lanzamientos) {
+
+        int cara = 0;
+        int cruz = 0;
+        for(int i = 0; i < lanzamientos; i++){
+            Aleatorio.generaAleatorioBooleano();
+            if(Aleatorio.generaAleatorioBooleano()){
+                cara++;
+            }else cruz++;
+        }
+        System.out.printf("Han salido %d caras y %d cruces", cara,cruz);
+
+    }
+
+    private static void ejercicio11() {
+
+        int numLanzamientos;
+        do {
+            numLanzamientos = Entrada.pideEntero("¿Cúantas veces quieres lanzar la moneda?");
+        }while(!Validador.mayorQueCero(numLanzamientos));
+
+        muestraLanzamientos(numLanzamientos);
+
+    }
+
     public static void main(String[] args) {
 
         inicializar();
 
-        System.out.println("-----Ejercicio 1-4-----");
+        /*System.out.println("-----Ejercicio 1-4-----");
         ejercicio1();
         System.out.println("-----Ejercicio 5-----");
         ejercicio5();
         System.out.println("-----Ejercicio 7-----");
         ejercicio7();
         System.out.println("-----Ejercicio 8-----");
-        ejercicio8();
+        ejercicio8();*/
+        System.out.println("-----Ejercicio11-----");
+        ejercicio11();
 
     }
 
