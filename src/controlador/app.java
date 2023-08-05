@@ -6,11 +6,27 @@ import org.w3c.dom.ls.LSOutput;
 import servicios.Validador;
 import servicios.pideDatos;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class app {
 
+    private static final int NUM_PERSONAS = 3;
     public static Scanner sc = new Scanner(System.in);
+    public static List<Persona> personas;
+    public static Persona [] persona;
+
+    private static void inicializar() {
+
+        if(personas == null){
+            personas = new ArrayList<Persona>();
+        }
+
+        persona = new Persona[NUM_PERSONAS];
+
+    }
+
 
     private static void ejercicio1() {
 
@@ -39,19 +55,17 @@ public class app {
         }
     }
 
-    private static void muestraPersonas(Persona[] personas) {
+    private static void muestraPersonas() {
 
-        for (Persona persona : personas) {
-            persona.presentar();
+        for (Persona p : persona) {
+            System.out.println(p.presentar());
         }
-
     }
 
     private static void ejercicio7() {
 
-        Persona[] personas = new Persona[3];
 
-        for(int i = 0; i < personas.length; i++) {
+        for(int i = 0; i < persona.length; i++) {
             System.out.println("Introduce nombre de la persona:");
             String nombre = sc.nextLine();
 
@@ -60,14 +74,22 @@ public class app {
                 edad = pideDatos.pideNumero("Introduce una edad:");
             } while (Validador.estaEntre(edad, 0, 99));
 
-            personas[i] = new Persona(nombre,edad);
+            persona[i] = new Persona(nombre,edad);
         }
 
-        muestraPersonas(personas);
+        muestraPersonas();
+
+    }
+
+    private static void ejercicio8() {
+
+
 
     }
 
     public static void main(String[] args) {
+
+        inicializar();
 
         System.out.println("-----Ejercicio 1-4-----");
         ejercicio1();
@@ -76,7 +98,7 @@ public class app {
         System.out.println("-----Ejercicio 7-----");
         ejercicio7();
         System.out.println("-----Ejercicio 8-----");
-        
+        ejercicio8();
 
     }
 
