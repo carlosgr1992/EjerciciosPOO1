@@ -57,6 +57,7 @@ public class app {
 
     private static void muestraPersonas() {
 
+        System.out.printf("Datos de las %d personas guardadas",persona.length);
         for (Persona p : persona) {
             System.out.println(p.presentar());
         }
@@ -69,10 +70,16 @@ public class app {
             System.out.println("Introduce nombre de la persona:");
             String nombre = sc.nextLine();
 
-            int edad = 0;
+            int edad;
+            boolean esValido;
+
             do {
                 edad = pideDatos.pideNumero("Introduce una edad:");
-            } while (Validador.estaEntre(edad, 0, 99));
+                esValido = Validador.estaEntre(edad,0,99);
+                if(!esValido){
+                    System.out.println("Por favor, introduzca un valor correcto");
+                }
+            } while (!esValido);
 
             persona[i] = new Persona(nombre,edad);
         }

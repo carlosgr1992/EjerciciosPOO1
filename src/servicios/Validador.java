@@ -4,7 +4,7 @@ public class Validador {
 
     public static boolean estaEntre(int numero,int min, int max){
 
-        return min >= numero && max <= numero;
+        return numero >= min && numero <= max;
     }
 
     public static boolean tieneContenido(String texto){
