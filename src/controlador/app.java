@@ -1,5 +1,6 @@
 package controlador;
 
+import modelo.Meteo;
 import modelo.Persona;
 import modelo.Producto;
 import servicios.Aleatorio;
@@ -156,6 +157,13 @@ public class app {
 
     }
 
+    private static void ejercicio13() {
+
+        Meteo meteo = new Meteo(500,10,10);
+        System.out.println(meteo);
+
+    }
+
     public static void main(String[] args) {
 
         inicializar();
@@ -167,10 +175,15 @@ public class app {
         System.out.println("-----Ejercicio 7-----");
         ejercicio7();
         System.out.println("-----Ejercicio 8-----");
-        ejercicio8();*/
+        ejercicio8();
         System.out.println("-----Ejercicio11-----");
-        ejercicio11();
+        ejercicio11();*/
+        System.out.println("-----Ejercicio13-----");
+        ejercicio13();
+
 
     }
+
+
 
 }

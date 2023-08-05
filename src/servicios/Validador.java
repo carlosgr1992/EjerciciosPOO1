@@ -7,6 +7,11 @@ public class Validador {
         return numero >= min && numero <= max;
     }
 
+    public static boolean estaEntre(double numero,double min, double max){
+
+        return numero >= min && numero <= max;
+    }
+
     public static boolean tieneContenido(String texto){
 
         return !texto.isBlank();
