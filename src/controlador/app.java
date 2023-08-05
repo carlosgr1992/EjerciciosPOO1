@@ -91,18 +91,34 @@ public class app {
 
     private static int preguntaPersonas() {
 
-        boolean esValido;
-        int numPersonas;
-
-        do {
-            numPersonas = Entrada.pideEntero("¿Cuántas personas quieres añadir?");
-            esValido = Validador.estaEntre(numPersonas,MIN_PERSONAS,MAX_PERSONAS);
-            if(!esValido){
-                System.out.printf("Por favor, introduce un valor correcto entre %d y %d\n",MIN_PERSONAS,MAX_PERSONAS);
-            }
-        }while(!esValido);
+        boolean esValido = false;
+        int numPersonas = 0;
+            do {
+                try {
+                numPersonas = Entrada.pideEntero("¿Cuántas personas quieres añadir?");
+                esValido = Validador.estaEntre(numPersonas, MIN_PERSONAS, MAX_PERSONAS);
+                if (!esValido) {
+                    System.out.printf("Por favor, introduce un valor correcto entre %d y %d\n", MIN_PERSONAS, MAX_PERSONAS);
+                }
+            }catch(NumberFormatException ex){
+                System.out.println(ex.getMessage());
+                }
+            } while (!esValido);
 
         return numPersonas;
+    }
+
+    private static String pideFraseValidada() {
+
+        boolean esValido;
+        String fraseValidada;
+
+        do {
+            fraseValidada = Entrada.pideTexto("Introduce nombre de la persona:");
+            esValido = Validador.tieneContenido(fraseValidada) && !Validador.esNumero(fraseValidada);
+        } while (!esValido);
+
+        return fraseValidada;
     }
 
     private static void ejercicio8() {
@@ -112,17 +128,22 @@ public class app {
         Persona[] personasArray2 = new Persona[numPersonas];
 
         for(int i = 0; i < personasArray2.length; i++) {
-            System.out.println("Introduce nombre de la persona:");
-            String nombre = sc.nextLine();
 
-            int edad;
+            String nombre = pideFraseValidada();
+
+            int edad = 0;
             boolean esValido;
 
             do {
-                edad = Entrada.pideEntero("Introduce una edad:");
-                esValido = Validador.estaEntre(edad,0,99);
-                if(!esValido){
-                    System.out.println("Por favor, introduzca un valor correcto\n");
+                try {
+                    edad = Entrada.pideEntero("Introduce una edad:");
+                    esValido = Validador.estaEntre(edad, 0, 99);
+                    if (!esValido) {
+                        System.out.println("Por favor, introduzca un valor correcto\n");
+                    }
+                }catch(NumberFormatException ex){
+                    System.out.println("No ha introducido un número");
+                    esValido = false;
                 }
             } while (!esValido);
 
@@ -167,6 +188,11 @@ public class app {
             System.out.println(meteo.parteMeteorologico());
         }
 
+    }
+
+    private static void ejercicio14() {
+
+
 
     }
 
@@ -183,13 +209,13 @@ public class app {
         System.out.println("-----Ejercicio 8-----");
         ejercicio8();
         System.out.println("-----Ejercicio11-----");
-        ejercicio11();*/
+        ejercicio11();
         System.out.println("-----Ejercicio13-----");
-        ejercicio13();
-
+        ejercicio13();*/
+        System.out.println("-----Ejercicio14-----");
+        ejercicio14();
 
     }
-
 
 
 }

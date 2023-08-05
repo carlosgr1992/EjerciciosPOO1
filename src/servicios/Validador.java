@@ -18,6 +18,12 @@ public class Validador {
 
     }
 
+    public static boolean esNumero(String texto){
+
+        return texto.matches("^\\d+$");
+
+    }
+
     public static boolean mayorQueCero(int numero){
 
         return numero > 0;
