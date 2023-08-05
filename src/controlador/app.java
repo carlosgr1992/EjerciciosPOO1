@@ -2,7 +2,6 @@ package controlador;
 
 import modelo.Persona;
 import modelo.Producto;
-import org.w3c.dom.ls.LSOutput;
 import servicios.Validador;
 import servicios.pideDatos;
 
@@ -12,18 +11,17 @@ import java.util.Scanner;
 
 public class app {
 
+
+    private static final int MIN_PERSONAS = 1;
+    private static final int MAX_PERSONAS = 6;
     private static final int NUM_PERSONAS = 3;
     public static Scanner sc = new Scanner(System.in);
-    public static List<Persona> personas;
-    public static Persona [] persona;
+
+    public static Persona [] personasArray;
 
     private static void inicializar() {
 
-        if(personas == null){
-            personas = new ArrayList<Persona>();
-        }
-
-        persona = new Persona[NUM_PERSONAS];
+        personasArray = new Persona[NUM_PERSONAS];
 
     }
 
@@ -55,10 +53,13 @@ public class app {
         }
     }
 
-    private static void muestraPersonas() {
+    private static void muestraPersonas(Persona[] arrayPersonas) {
 
-        System.out.printf("Datos de las %d personas guardadas",persona.length);
-        for (Persona p : persona) {
+        if(arrayPersonas.length == 1){
+            System.out.printf("Los datos de la persona guardada es:\n");
+        }else System.out.printf("Datos de las %d personas guardadas\n", arrayPersonas.length);
+
+        for (Persona p : arrayPersonas) {
             System.out.println(p.presentar());
         }
     }
@@ -66,7 +67,51 @@ public class app {
     private static void ejercicio7() {
 
 
-        for(int i = 0; i < persona.length; i++) {
+        for(int i = 0; i < personasArray.length; i++) {
+            System.out.printf("%d.Introduce nombre de la persona:", i+1);
+            String nombre = sc.nextLine();
+
+            int edad;
+            boolean esValido;
+
+            do {
+                edad = pideDatos.pideNumero("Introduce una edad:");
+                esValido = Validador.estaEntre(edad,0,99);
+                if(!esValido){
+                    System.out.println("Por favor, introduzca un valor correcto\n");
+                }
+            } while (!esValido);
+
+            personasArray[i] = new Persona(nombre,edad);
+        }
+
+        muestraPersonas(personasArray);
+
+    }
+
+    private static int preguntaPersonas() {
+
+        boolean esValido;
+        int numPersonas;
+
+        do {
+            numPersonas = pideDatos.pideNumero("¿Cuántas personas quieres añadir?");
+            esValido = Validador.estaEntre(numPersonas,MIN_PERSONAS,MAX_PERSONAS);
+            if(!esValido){
+                System.out.printf("Por favor, introduce un valor correcto entre %d y %d\n",MIN_PERSONAS,MAX_PERSONAS);
+            }
+        }while(!esValido);
+
+        return numPersonas;
+    }
+
+    private static void ejercicio8() {
+
+        int numPersonas = preguntaPersonas();
+
+        Persona[] personasArray2 = new Persona[numPersonas];
+
+        for(int i = 0; i < personasArray2.length; i++) {
             System.out.println("Introduce nombre de la persona:");
             String nombre = sc.nextLine();
 
@@ -77,21 +122,14 @@ public class app {
                 edad = pideDatos.pideNumero("Introduce una edad:");
                 esValido = Validador.estaEntre(edad,0,99);
                 if(!esValido){
-                    System.out.println("Por favor, introduzca un valor correcto");
+                    System.out.println("Por favor, introduzca un valor correcto\n");
                 }
             } while (!esValido);
 
-            persona[i] = new Persona(nombre,edad);
+            personasArray2[i] = new Persona(nombre,edad);
         }
 
-        muestraPersonas();
-
-    }
-
-    private static void ejercicio8() {
-
-
-
+        muestraPersonas(personasArray2);
     }
 
     public static void main(String[] args) {
