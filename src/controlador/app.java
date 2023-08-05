@@ -3,8 +3,14 @@ package controlador;
 import modelo.Persona;
 import modelo.Producto;
 import org.w3c.dom.ls.LSOutput;
+import servicios.Validador;
+import servicios.pideDatos;
+
+import java.util.Scanner;
 
 public class app {
+
+    public static Scanner sc = new Scanner(System.in);
 
     private static void ejercicio1() {
 
@@ -33,6 +39,33 @@ public class app {
         }
     }
 
+    private static void muestraPersonas(Persona[] personas) {
+
+        for (Persona persona : personas) {
+            persona.presentar();
+        }
+
+    }
+
+    private static void ejercicio7() {
+
+        Persona[] personas = new Persona[3];
+
+        for(int i = 0; i < personas.length; i++) {
+            System.out.println("Introduce nombre de la persona:");
+            String nombre = sc.nextLine();
+
+            int edad = 0;
+            do {
+                edad = pideDatos.pideNumero("Introduce una edad:");
+            } while (Validador.estaEntre(edad, 0, 99));
+
+            personas[i] = new Persona(nombre,edad);
+        }
+
+        muestraPersonas(personas);
+
+    }
 
     public static void main(String[] args) {
 
@@ -40,11 +73,11 @@ public class app {
         ejercicio1();
         System.out.println("-----Ejercicio 5-----");
         ejercicio5();
-
+        System.out.println("-----Ejercicio 7-----");
+        ejercicio7();
+        System.out.println("-----Ejercicio 8-----");
+        
 
     }
-
-
-
 
 }
