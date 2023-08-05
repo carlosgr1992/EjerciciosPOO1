@@ -4,12 +4,12 @@ import servicios.Validador;
 
 public class Meteo {
 
-    private static final double MIN_TEMPERATURA = -10.00;
-    private static final double MAX_TEMPERATURA = -55.00;
-    private static final int MIN_HUMEDAD = 0;
-    private static final int MAX_HUMEDAD = 100;
-    private static final int MIN_PRESION = 1013;
-    private static final int MAX_PRESION = 2026;
+    public static final double MIN_TEMPERATURA = -10.00;
+    public static final double MAX_TEMPERATURA = 55.00;
+    public static final int MIN_HUMEDAD = 0;
+    public static final int MAX_HUMEDAD = 100;
+    public static final int MIN_PRESION = 1013;
+    public static final int MAX_PRESION = 2026;
     double temperatura;
     int humedad;
     int presionAtmosferica;
@@ -29,7 +29,7 @@ public class Meteo {
         return getTemperatura() > 10 && getHumedad() > 65 && getPresionAtmosferica() < 1650;
     }
 
-    public boolean proableViento(){
+    public boolean probableViento(){
 
         return getTemperatura() >= 15 && getTemperatura() <= 25 && getHumedad() >40 && getHumedad() < 80 && getPresionAtmosferica() > 1050;
     }
@@ -40,7 +40,8 @@ public class Meteo {
             this.temperatura = MIN_TEMPERATURA;
         }else if(temperatura > MAX_TEMPERATURA){
             this.temperatura = MAX_TEMPERATURA;
-        }else this.temperatura = temperatura;
+        }
+        else this.temperatura = temperatura;
 
     }
 
@@ -60,5 +61,15 @@ public class Meteo {
 
     public void setPresionAtmosferica(int presionAtmosferica) {
         this.presionAtmosferica = Math.min(MAX_PRESION,Math.max(presionAtmosferica,MIN_PRESION));
+    }
+
+    public String parteMeteorologico(){
+
+        StringBuilder sb = new StringBuilder();
+        sb.append(String.format("T: %.2f \t H: %d \t P: %d \t ¿Lluvias? %s \t ¿Vientos? %s ",getTemperatura(),getHumedad(),getPresionAtmosferica(),
+                probableLluvia() ? "Alta probabilidad" : "Baja probabilidad",
+                probableViento() ? "Alta probabilidad" : "Baja probabilidad"));
+
+        return sb.toString();
     }
 }

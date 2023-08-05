@@ -159,8 +159,14 @@ public class app {
 
     private static void ejercicio13() {
 
-        Meteo meteo = new Meteo(500,10,10);
-        System.out.println(meteo);
+        for(int i = 0; i < 100; i++){
+            Meteo meteo = new Meteo(Aleatorio.generaAleatorioEnteroEntreDosNumeros(Meteo.MIN_TEMPERATURA,Meteo.MAX_TEMPERATURA),
+                    Aleatorio.generaAleatorioEnteroEntreDosNumeros(Meteo.MIN_HUMEDAD,Meteo.MAX_HUMEDAD),
+                    Aleatorio.generaAleatorioEnteroEntreDosNumeros(Meteo.MIN_PRESION,Meteo.MAX_PRESION));
+            System.out.printf("Parte nº %d\n", i +1 );
+            System.out.println(meteo.parteMeteorologico());
+        }
+
 
     }
 

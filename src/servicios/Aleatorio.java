@@ -11,6 +11,12 @@ public class Aleatorio {
         return aleatorio;
 
     }
+    public static double generaAleatorioEnteroEntreDosNumeros(double num1, double num2){
+
+        double aleatorio = random.nextDouble(num2 - num1 + 1) + num1;
+        return aleatorio;
+
+    }
 
     public static double generaAleatorioReal(){
 
