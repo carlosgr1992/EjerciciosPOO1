@@ -26,6 +26,7 @@ public class Pedido {
 
     public LocalDateTime getFechaPedido() {
         return fechaPedido;
+        
     }
 
     public double sumaTotalFactura(){
