@@ -1,13 +1,11 @@
 package controlador;
 
-import modelo.LineaPedido;
-import modelo.Meteo;
-import modelo.Persona;
-import modelo.Producto;
+import modelo.*;
 import servicios.Aleatorio;
 import servicios.Validador;
 import servicios.Entrada;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -216,6 +214,13 @@ public class app {
         muestraLineaPedido(lineaPedidoList);
     }
 
+    private static void ejercicio16() {
+
+        Pedido pedido = new Pedido(lineaPedidoList, LocalDateTime.now());
+        System.out.println(pedido.muestraCabeceraFacturaTotal() + pedido.muestraLineasTotal());
+
+    }
+
     public static void main(String[] args) {
 
         inicializar();
@@ -234,7 +239,8 @@ public class app {
         ejercicio13();*/
         System.out.println("-----Ejercicio15-----");
         ejercicio15();
-
+        System.out.println("-----Ejercicio16/17-----");
+        ejercicio16();
 
     }
 
