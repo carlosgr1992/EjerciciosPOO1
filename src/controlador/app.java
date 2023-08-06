@@ -1,5 +1,6 @@
 package controlador;
 
+import modelo.LineaPedido;
 import modelo.Meteo;
 import modelo.Persona;
 import modelo.Producto;
@@ -7,10 +8,13 @@ import servicios.Aleatorio;
 import servicios.Validador;
 import servicios.Entrada;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class app {
 
+    private static List<LineaPedido> lineaPedidoList;
 
     private static final int MIN_PERSONAS = 1;
     private static final int MAX_PERSONAS = 6;
@@ -23,6 +27,7 @@ public class app {
 
         personasArray = new Persona[NUM_PERSONAS];
 
+        lineaPedidoList = new ArrayList<LineaPedido>();
     }
 
 
@@ -190,10 +195,25 @@ public class app {
 
     }
 
-    private static void ejercicio14() {
+    private static void muestraLineaPedido(List<LineaPedido> lineaPedidoList) {
 
+        System.out.println("Pedido realizado:");
+        System.out.println("-----------------");
+        lineaPedidoList.forEach(lineaPedido -> System.out.println(lineaPedido.muestraLinea()));
 
+    }
 
+    private static void ejercicio15() {
+
+        Producto patatas = new Producto("Patatas",4.19);
+
+        lineaPedidoList.add(new LineaPedido(patatas,5));
+        lineaPedidoList.add(new LineaPedido(new Producto("Chorizo",1.59),2));
+        lineaPedidoList.add(new LineaPedido(new Producto("Fresas",1.15),4));
+        lineaPedidoList.add(new LineaPedido(new Producto("Uvas",0.49),5));
+        lineaPedidoList.add(new LineaPedido(new Producto("Pera",0.49),7));
+
+        muestraLineaPedido(lineaPedidoList);
     }
 
     public static void main(String[] args) {
@@ -212,10 +232,10 @@ public class app {
         ejercicio11();
         System.out.println("-----Ejercicio13-----");
         ejercicio13();*/
-        System.out.println("-----Ejercicio14-----");
-        ejercicio14();
+        System.out.println("-----Ejercicio15-----");
+        ejercicio15();
+
 
     }
-
 
 }
