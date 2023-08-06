@@ -8,8 +8,8 @@ import java.util.List;
 public class Pedido {
 
     private static final DateTimeFormatter FORMATO = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
-     private List<LineaPedido> listaLineasDePedido;
-    private LocalDateTime fechaPedido;
+     private final List<LineaPedido> listaLineasDePedido;
+    private final LocalDateTime fechaPedido;
 
     public Pedido(List<LineaPedido> listaLineasDePedido, LocalDateTime fechaPedido) {
         if (listaLineasDePedido == null) {
@@ -30,8 +30,7 @@ public class Pedido {
 
     public double sumaTotalFactura(){
 
-        double sumaTotal = listaLineasDePedido.stream().mapToDouble(lineaPedido -> lineaPedido.getTotal()).sum();
-        return sumaTotal;
+        return listaLineasDePedido.stream().mapToDouble(lineaPedido -> lineaPedido.getTotal()).sum();
 
     }
 
